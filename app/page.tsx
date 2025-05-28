@@ -28,6 +28,14 @@ import ModelsTab from "@/components/models-tab";
 import QueueTab from "@/components/queue-tab";
 import AnalyticsTab from "@/components/analytics-tab";
 import DashboardCharts from "@/components/dashboard-charts";
+import StlViewer from "@/components/stl-viewer";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function Dashboard() {
   const [currentPrint, setCurrentPrint] = useState({
@@ -35,6 +43,9 @@ export default function Dashboard() {
     progress: 67,
     timeLeft: "2г 15хв",
     status: "printing",
+    stlUrl:
+      // "https://files.printables.com/media/prints/3161/stls/123914_1f1d8ca1-252a-4770-846f-52f1208d193d/3dbenchy.stl",
+      "https://files.printables.com/media/prints/1038186/stls/7873816_1285a7a0-0b3f-4ae8-aa5f-a328c7da114f_568f7dee-f1bc-4ecb-86f6-7aa3c16149a6/cutelittledragon.stl",
   });
 
   const stats = [
@@ -123,6 +134,22 @@ export default function Dashboard() {
                     <Button variant="outline" size="sm">
                       <Square className="h-4 w-4" />
                     </Button>
+
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <Button variant="outline" size="sm">
+                          Перегляд
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-5xl">
+                        <DialogHeader>
+                          <DialogTitle>
+                            Превʼю моделі: {currentPrint.name}
+                          </DialogTitle>
+                        </DialogHeader>
+                        <StlViewer url={currentPrint.stlUrl} />
+                      </DialogContent>
+                    </Dialog>
                   </div>
                 </div>
               </CardHeader>
